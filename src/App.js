@@ -66,6 +66,8 @@ const deleteData=(id)=>{
         {UserData.map((val,key)=>{
           return <div key={key}>
                     <h1>{val.FirstName} {val.LastName}</h1>
+                    <h2>{val.Email}</h2>
+                    <h2>{val.Phone}</h2>
                     <input type="text" placeholder="Enter data" onChange={(event)=>{setNewData(event.target.value)}}/>
                     <button onClick={()=>updateData(val._id)}>Update</button>
                     <button onClick={()=>deleteData(val._id)}>Delete</button>
