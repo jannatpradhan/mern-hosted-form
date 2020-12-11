@@ -13,7 +13,7 @@ function App() {
   const [newData,setNewData]=useState("")
 
   useEffect(()=>{
-    Axios.get("http://localhost:3001/view").then((res)=>{
+    Axios.get("https://mern-demo-form.herokuapp.com/view").then((res)=>{
       console.log(res.data)
       setUserData(res.data)
     })
