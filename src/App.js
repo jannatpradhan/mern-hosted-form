@@ -13,7 +13,7 @@ function App() {
   const [newData,setNewData]=useState("")
 
   useEffect(()=>{
-    Axios.get("https://mern-demo-form.herokuapp.com/view").then((res)=>{
+    Axios.get("http://localhost:3001/view").then((res)=>{
       console.log(res.data)
       setUserData(res.data)
     })
@@ -41,11 +41,11 @@ const updateData=(id)=>{
 
 
 const deleteData=(id)=>{
-  Axios.delete(`https://mern-demo-form.herokuapp.com/${id}`,{
-  }).then((res)=>{
+  Axios.delete(`https://mern-demo-form.herokuapp.com/delete/${id}`)
+  .then((res)=>{
     alert("Data deleted...please refresh the page")
   })
-}
+};
 
   return (
     <div className="App">
