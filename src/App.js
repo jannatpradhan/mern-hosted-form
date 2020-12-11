@@ -1,23 +1,69 @@
-import logo from './logo.svg';
+
+import { useEffect, useState } from 'react';
+import Axios from 'axios';
 import './App.css';
 
 function App() {
+  const [firstName,setFirstName]=useState("");
+  const [lastName,setlastName]=useState("")
+  const [email,setemail]=useState("")
+  const [phone,setphone]=useState("")
+  const [image,setimage]=useState("")
+  const [UserData,setUserData]=useState([])
+  const [newData,setNewData]=useState("")
+
+  useEffect(()=>{
+    Axios.get("http://localhost:3001/view").then((res)=>{
+      console.log(res.data)
+      setUserData(res.data)
+    })
+  },[])
+
+  const addToField=()=>{
+    Axios.post("http://localhost:3001/insert",{
+      firstName:firstName,
+      email:email,
+      lastName:lastName,
+      phone:phone,
+      image:image
+    })
+    alert("Submitted");
+  }
+
+const updateData=(id)=>{
+  Axios.put("http://localhost:3001/update",{
+    id:id,
+    newData:newData
+  }).then((res)=>{
+    console.log(res)
+  })
+}
+
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <h1>My form</h1>
+      <label>First Name</label>
+      <input type="text" onChange={(event)=>{setFirstName(event.target.value)}}/>
+      <label>Last Name</label>
+      <input type="text" onChange={(event)=>{setlastName(event.target.value)}}/>
+      <label>Email ID</label>
+      <input type="text" onChange={(event)=>{setemail(event.target.value)}}/>
+      <label>Phone Number</label>
+      <input type="text" onChange={(event)=>{setphone(event.target.value)}}/>
+      <label>Upload Image</label>
+      <input type="file" onChange={(event)=>{setimage(event.target.value)}}/>
+      <button onClick={addToField}>Add</button>
+      <div>
+        <h1>UserData</h1>
+        {UserData.map((val,key)=>{
+          return <div key={key}>
+                    <h1>{val.FirstName} {val.LastName}</h1>
+                    <input type="text" placeholder="Enter data" onChange={(event)=>{setNewData(event.target.value)}}/>
+                    <button onClick={()=>updateData(val._id)}>Update</button>
+                    <button>Delete</button>
+                 </div>
+        })}
+      </div>
     </div>
   );
 }
