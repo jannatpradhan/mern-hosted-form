@@ -13,14 +13,14 @@ function App() {
   const [newData,setNewData]=useState("")
 
   useEffect(()=>{
-    Axios.get("http://localhost:3001/view").then((res)=>{
+    Axios.get("https://mern-demo-form.herokuapp.com/view").then((res)=>{
       console.log(res.data)
       setUserData(res.data)
     })
   },[])
 
   const addToField=()=>{
-    Axios.post("http://localhost:3001/insert",{
+    Axios.post("https://mern-demo-form.herokuapp.com/insert",{
       firstName:firstName,
       email:email,
       lastName:lastName,
@@ -31,7 +31,7 @@ function App() {
   }
 
 const updateData=(id)=>{
-  Axios.put("http://localhost:3001/update",{
+  Axios.put("https://mern-demo-form.herokuapp.com/update",{
     id:id,
     newData:newData
   }).then((res)=>{
