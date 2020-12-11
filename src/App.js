@@ -35,7 +35,15 @@ const updateData=(id)=>{
     id:id,
     newData:newData
   }).then((res)=>{
-    console.log(res)
+    alert("Data updated...please refresh the page")
+  })
+};
+
+
+const deleteData=(id)=>{
+  Axios.delete(`https://mern-demo-form.herokuapp.com/${id}`,{
+  }).then((res)=>{
+    alert("Data deleted...please refresh the page")
   })
 }
 
@@ -60,7 +68,7 @@ const updateData=(id)=>{
                     <h1>{val.FirstName} {val.LastName}</h1>
                     <input type="text" placeholder="Enter data" onChange={(event)=>{setNewData(event.target.value)}}/>
                     <button onClick={()=>updateData(val._id)}>Update</button>
-                    <button>Delete</button>
+                    <button onClick={()=>deleteData(val._id)}>Delete</button>
                  </div>
         })}
       </div>
